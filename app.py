@@ -33,55 +33,8 @@ def callback():
 # 處理訊息
 @handler.add(MessageEvent, message=TextMessage)
 def handle_message(event):
-    message = TemplateSendMessage(
-    alt_text='ImageCarousel template',
-    template=ImageCarouselTemplate(
-        columns=[
-            ImageCarouselColumn(
-                image_url='https://example.com/item1.jpg',
-                action=PostbackTemplateAction(
-                    label='飯',
-                    text='飯',
-                    data='action=buy&itemid=1'
-                )
-            ),
-            ImageCarouselColumn(
-                image_url='https://example.com/item1.jpg',
-                action=PostbackTemplateAction(
-                    label='麵',
-                    text='麵',
-                    data='action=buy&itemid=2'
-                )
-            ),
-            ImageCarouselColumn(
-                image_url='https://example.com/item1.jpg',
-                action=PostbackTemplateAction(
-                    label='鍋',
-                    text='鍋',
-                    data='action=buy&itemid=1'
-                )
-            ),
-            ImageCarouselColumn(
-                image_url='https://example.com/item1.jpg',
-                action=PostbackTemplateAction(
-                    label='飲料',
-                    text='飲料',
-                    data='action=buy&itemid=1'
-                )
-            ),
-            ImageCarouselColumn(
-                image_url='https://example.com/item1.jpg',
-                action=PostbackTemplateAction(
-                    label='其他',
-                    text='其他',
-                    data='action=buy&itemid=1'
-                )
-            )
-        ]
-    )
-)
+    message = TextSendMessage(text=event.message.text)
     line_bot_api.reply_message(event.reply_token, message)
-
 
 import os
 if __name__ == "__main__":
