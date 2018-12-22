@@ -55,22 +55,22 @@ def handle_message(event):
         line_bot_api.reply_message(event.reply_token, template_message) # 送出訊息，訊息內容為'template_message'
     elif text == '吃吃':
         carousel_template = CarouselTemplate(columns=[
-            CarouselColumn(text='大門',thumbnailImageUrl = 'https://i.imgur.com/AYnMrZx.jpg', actions=[
+            CarouselColumn(text='大門',thumbnailImageUrl = 'https://i.imgur.com/wT9Rjq7.jpg', actions=[
                 MessageAction(label='飯', text='大門_飯'),
                 MessageAction(label='麵', text='大門_麵'),
                 MessageAction(label='其他', text='大門_其他')
             ]),
-            CarouselColumn(text='公館',thumbnailImageUrl = 'https://photos.app.goo.gl/N7Dev9mZD98Qqbfv7', actions=[
+            CarouselColumn(text='公館',thumbnailImageUrl = 'https://i.imgur.com/v8iBIHC.jpg', actions=[
                 MessageAction(label='飯', text='公館_飯'),
                 MessageAction(label='麵', text='公館_麵'),
                 MessageAction(label='其他', text='公館_其他')
             ]),
-            CarouselColumn(text='溫州',thumbnailImageUrl = 'https://photos.app.goo.gl/N7Dev9mZD98Qqbfv7', actions=[
+            CarouselColumn(text='溫州',thumbnailImageUrl = 'https://i.imgur.com/7ZplVvJ.jpg', actions=[
                 MessageAction(label='飯', text='溫州_飯'),
                 MessageAction(label='麵', text='溫州_麵'),
                 MessageAction(label='其他', text='溫州_其他')
             ]),
-            CarouselColumn(text='後門',thumbnailImageUrl = 'https://photos.app.goo.gl/N7Dev9mZD98Qqbfv7', actions=[
+            CarouselColumn(text='後門',thumbnailImageUrl = 'https://i.imgur.com/NrFOHGo.jpg', actions=[
                 MessageAction(label='飯', text='後門_飯'),
                 MessageAction(label='麵', text='後門_麵'),
                 MessageAction(label='其他', text='後門_其他')
@@ -97,7 +97,7 @@ def handle_message(event):
         bubble = BubbleContainer(
             direction='ltr',
             hero=ImageComponent(
-                url='https://i.imgur.com/AYnMrZx.jpg',
+                url='https://i.imgur.com/wT9Rjq7.jpg',
                 size='full',
                 aspect_ratio='20:13',
                 aspect_mode='cover',
