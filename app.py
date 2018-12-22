@@ -44,7 +44,7 @@ def handle_message(event):
 
     if text == 'buttons' or text == '按鈕':
         buttons_template = ButtonsTemplate(
-            thumbnailImageUrl='https://i.imgur.com/fIKfTIi.jpg',title='My buttons sample', text='Hello, my buttons', actions=[
+            thumb_nail_ImageUrl='https://i.imgur.com/fIKfTIi.jpg',title='My buttons sample', text='Hello, my buttons', actions=[
                 URIAction(label='Go to line.me', uri='https://line.me'),
                 PostbackAction(label='ping', data='ping'),
                 PostbackAction(label='ping with text', data='ping', text='ping'),
