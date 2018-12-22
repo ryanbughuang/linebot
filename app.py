@@ -81,7 +81,7 @@ def handle_message(event):
         line_bot_api.reply_message(event.reply_token, template_message)
     elif text == 'image_carousel':
         image_carousel_template = ImageCarouselTemplate(columns=[
-            ImageCarouselColumn(image_url='https://via.placeholder.com/1024x1024',
+            ImageCarouselColumn(image_url='https://i.imgur.com/NrFOHGo.jpg',
                                 action=DatetimePickerAction(label='datetime',
                                                             data='datetime_postback',
                                                             mode='datetime')),
