@@ -54,7 +54,7 @@ def handle_message(event):
             alt_text='Buttons alt text', template=buttons_template)
         line_bot_api.reply_message(event.reply_token, template_message) # 送出訊息，訊息內容為'template_message'
     elif text == '吃吃':
-        carousel_template = CarouselTemplate(imageAspectRatio='rectangle',imageSize='contain',columns=[
+        carousel_template = CarouselTemplate(imageAspectRatio='rectangle',imageSize='cover',columns=[
             CarouselColumn(text='大門',thumbnailImageUrl = 'https://i.imgur.com/fIKfTIi.jpg', actions=[
                 MessageAction(label='飯', text='大門_飯'),
                 MessageAction(label='麵', text='大門_麵'),
