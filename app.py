@@ -42,7 +42,7 @@ def callback():
 def handle_message(event):
     text = event.message.text # 使用者傳的訊息存成變數 text
 
-    if text == 'buttons' or text == '按鈕':
+    if text == 'buttons' or text == '發票':
         buttons_template = ButtonsTemplate(
             thumbnail_image_url='https://i.imgur.com/fIKfTIi.jpg',title='My buttons sample', text='Hello, my buttons', actions=[
                 URIAction(label='Go to line.me', uri='https://line.me'),
@@ -93,7 +93,7 @@ def handle_message(event):
         template_message = TemplateSendMessage(
             alt_text='ImageCarousel alt text', template=image_carousel_template)
         line_bot_api.reply_message(event.reply_token, template_message)
-    elif text == 'flex':
+    elif text == 'flex' or text == '推薦':
         bubble = BubbleContainer(
             direction='ltr',
             hero=ImageComponent(
