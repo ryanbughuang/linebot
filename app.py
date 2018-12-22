@@ -42,7 +42,7 @@ def callback():
 def handle_message(event):
     text = event.message.text
 
-    if text == 'buttons':
+    if text == 'buttons' or text == '按鈕':
         buttons_template = ButtonsTemplate(
             title='My buttons sample', text='Hello, my buttons', actions=[
                 URIAction(label='Go to line.me', uri='https://line.me'),
@@ -53,7 +53,7 @@ def handle_message(event):
         template_message = TemplateSendMessage(
             alt_text='Buttons alt text', template=buttons_template)
         line_bot_api.reply_message(event.reply_token, template_message)
-    if text == 'carousel':
+    if text == 'carousel' or text == '旋轉':
         carousel_template = CarouselTemplate(columns=[
             CarouselColumn(text='hoge1', title='fuga1', actions=[
                 URIAction(label='Go to line.me', uri='https://line.me'),
@@ -67,7 +67,7 @@ def handle_message(event):
         template_message = TemplateSendMessage(
             alt_text='Carousel alt text', template=carousel_template)
         line_bot_api.reply_message(event.reply_token, template_message)
-    if text == 'image_carousel':
+    elif text == 'image_carousel':
         image_carousel_template = ImageCarouselTemplate(columns=[
             ImageCarouselColumn(image_url='https://via.placeholder.com/1024x1024',
                                 action=DatetimePickerAction(label='datetime',
