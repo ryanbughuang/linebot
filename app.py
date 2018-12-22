@@ -53,23 +53,27 @@ def handle_message(event):
         template_message = TemplateSendMessage(
             alt_text='Buttons alt text', template=buttons_template)
         line_bot_api.reply_message(event.reply_token, template_message) # 送出訊息，訊息內容為'template_message'
-    if text == 'carousel' or text == '吃吃':
+    if text == '吃吃':
         carousel_template = CarouselTemplate(columns=[
-            CarouselColumn(text='大門',thumbnailImageUrl = 'https://example.com/cafe.jpg', actions=[
-                URIAction(label='Go to line.me', uri='https://line.me'),
-                PostbackAction(label='ping', data='ping')
+            CarouselColumn(text='大門',thumbnailImageUrl = 'https://via.placeholder.com/1024x1024', actions=[
+                MessageAction(label='飯', text='大門_飯'),
+                MessageAction(label='麵', text='大門_麵'),
+                MessageAction(label='其他', text='大門_其他')
             ]),
             CarouselColumn(text='公館', actions=[
-                PostbackAction(label='ping with text', data='ping', text='ping'),
-                MessageAction(label='Translate Rice', text='米')
+                MessageAction(label='飯', text='公館_飯'),
+                MessageAction(label='麵', text='公館_麵'),
+                MessageAction(label='其他', text='公館_其他')
             ]),
             CarouselColumn(text='溫州', actions=[
-                PostbackAction(label='ping with text', data='ping', text='ping'),
-                MessageAction(label='Translate Rice', text='米')
+                MessageAction(label='飯', text='溫州_飯'),
+                MessageAction(label='麵', text='溫州_麵'),
+                MessageAction(label='其他', text='溫州_其他')
             ]),
             CarouselColumn(text='後門', actions=[
-                PostbackAction(label='ping with text', data='ping', text='ping'),
-                MessageAction(label='Translate Rice', text='米')
+                MessageAction(label='飯', text='後門_飯'),
+                MessageAction(label='麵', text='後門_麵'),
+                MessageAction(label='其他', text='後門_其他')
             ]),
         ])
         template_message = TemplateSendMessage(
