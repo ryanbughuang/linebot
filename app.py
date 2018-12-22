@@ -37,10 +37,10 @@ def callback():
         abort(400)
     return 'OK'
 
-# 處理訊息
-@handler.add(MessageEvent, message=TextMessage)
+
+@handler.add(MessageEvent, message=TextMessage) # 處理文字訊息（message = TextMessage），圖片
 def handle_message(event):
-    text = event.message.text
+    text = event.message.text # 使用者傳的訊息存成變數 text
 
     if text == 'buttons' or text == '按鈕':
         buttons_template = ButtonsTemplate(
@@ -48,18 +48,26 @@ def handle_message(event):
                 URIAction(label='Go to line.me', uri='https://line.me'),
                 PostbackAction(label='ping', data='ping'),
                 PostbackAction(label='ping with text', data='ping', text='ping'),
-                MessageAction(label='Translate Rice', text='米')
+                MessageAction(label='Translate Rice', text='米') #Messageaction: 替使用者傳訊息，label為選項的文字，text為要傳的訊息
             ])
         template_message = TemplateSendMessage(
             alt_text='Buttons alt text', template=buttons_template)
-        line_bot_api.reply_message(event.reply_token, template_message)
-    if text == 'carousel' or text == '旋轉':
+        line_bot_api.reply_message(event.reply_token, template_message) # 送出訊息，訊息內容為'template_message'
+    if text == 'carousel' or text == '吃吃':
         carousel_template = CarouselTemplate(columns=[
-            CarouselColumn(text='hoge1', title='fuga1', actions=[
+            CarouselColumn(text='大門',thumbnailImageUrl = 'https://example.com/cafe.jpg', actions=[
                 URIAction(label='Go to line.me', uri='https://line.me'),
                 PostbackAction(label='ping', data='ping')
             ]),
-            CarouselColumn(text='hoge2', title='fuga2', actions=[
+            CarouselColumn(text='公館', actions=[
+                PostbackAction(label='ping with text', data='ping', text='ping'),
+                MessageAction(label='Translate Rice', text='米')
+            ]),
+            CarouselColumn(text='溫州', actions=[
+                PostbackAction(label='ping with text', data='ping', text='ping'),
+                MessageAction(label='Translate Rice', text='米')
+            ]),
+            CarouselColumn(text='後門', actions=[
                 PostbackAction(label='ping with text', data='ping', text='ping'),
                 MessageAction(label='Translate Rice', text='米')
             ]),
