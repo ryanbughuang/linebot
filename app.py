@@ -1,5 +1,5 @@
 from __future__ import unicode_literals
-import pandas as pd
+
 import errno
 import os
 import sys
@@ -16,10 +16,6 @@ from linebot.exceptions import (
 from linebot.models import *
 
 app = Flask(__name__)
-
-# read all restaurant file
-all_restaurant = pd.read_csv('https://docs.google.com/spreadsheets/d/e/2PACX-1vRR3IygA5p4RzvLnqct1YS_5PngAP9ANKdcK0fhTuWEI6zA52YrqFyS-dBex3b6lcqt5WM4kQE0r3Oh/pub?gid=1208891693&single=true&output=csv',header=0)
-a = all_restaurant['restaurant'].loc[all_restaurant['restaurant'] == '椰林燒臘']
 
 # Channel Access Token
 line_bot_api = LineBotApi('03lCKiHH72CQak6lrU9vdhwyu5HUDEeihF4bQIxokPtct6L03QXfkHhvoFZI579Z95i9hdkX6eRbOWDOB+t0XwJMv/D70W7/x3wBX4+wCldtj4WpF7QC2yqClPExW/nrOUZMZJakON6zJsgAuR8N5wdB04t89/1O/w1cDnyilFU=')
@@ -46,9 +42,9 @@ def callback():
 def handle_message(event):
     text = event.message.text # 使用者傳的訊息存成變數 text
 
-    if  text == '發票' or text == '燒臘':
+    if  text == '發票':
         buttons_template = ButtonsTemplate(
-            thumbnail_image_url='https://i.imgur.com/fIKfTIi.jpg',title=a[2], text='Hello, my buttons', actions=[
+            thumbnail_image_url='https://i.imgur.com/fIKfTIi.jpg',title='My buttons sample', text='Hello, my buttons', actions=[
                 URIAction(label='Go to line.me', uri='https://line.me'),
                 PostbackAction(label='ping', data='ping'),
                 PostbackAction(label='ping with text', data='ping', text='ping'),
