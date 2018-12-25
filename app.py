@@ -97,10 +97,10 @@ def handle_message(event):
                 MessageAction(label='麵', text='公館_麵'),
                 MessageAction(label='其他', text='公館_其他')
             ]),
-            CarouselColumn(text='溫州',thumbnail_image_url='https://i.imgur.com/fIKfTIi.jpg', actions=[
-                MessageAction(label='飯', text='溫州_飯'),
-                MessageAction(label='麵', text='溫州_麵'),
-                MessageAction(label='其他', text='溫州_其他')
+            CarouselColumn(text='溫州街',thumbnail_image_url='https://i.imgur.com/fIKfTIi.jpg', actions=[
+                MessageAction(label='飯', text='溫州街_飯'),
+                MessageAction(label='麵', text='溫州街_麵'),
+                MessageAction(label='其他', text='溫州街_其他')
             ]),
             CarouselColumn(text='118巷',thumbnail_image_url='https://i.imgur.com/fIKfTIi.jpg', actions=[
                 MessageAction(label='飯', text='118巷_飯'),
