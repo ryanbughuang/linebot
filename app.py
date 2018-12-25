@@ -18,8 +18,18 @@ from linebot.models import *
 app = Flask(__name__)
 
 #
-all_restaurant = pd.read_csv('https://docs.google.com/spreadsheets/d/e/2PACX-1vRR3IygA5p4RzvLnqct1YS_5PngAP9ANKdcK0fhTuWEI6zA52YrqFyS-dBex3b6lcqt5WM4kQE0r3Oh/pub?gid=1208891693&single=true&output=csv',header=0)
-a = all_restaurant['restaurant'].loc[all_restaurant['restaurant'] == '椰林燒臘']
+all_restaurant = pd.read_csv('https://docs.google.com/spreadsheets/d/e/2PACX-1vRR3IygA5p4RzvLnqct1YS_5PngAP9ANKdcK0fhTuWEI6zA52YrqFyS-dBex3b6lcqt5WM4kQE0r3Oh/pub?output=csv',header=0)
+def rest_selector(reply_text):
+    res_loc, res_type = reply_text.split('_')
+    potential_200_low = all_restaurant['restaurant'][(all_restaurant.type2 == res_type) & (all_restaurant.loc_type == res_loc) & (all_restaurant.price <= 200)].tolist()
+    potential_200_up = all_restaurant['restaurant'][(all_restaurant.type2 == res_type) & (all_restaurant.loc_type == res_loc) & (all_restaurant.price >= 200)].tolist()
+    output = '200以下:\n'
+    for x in random.sample(range(0,len(potential_200_low)-1),2):
+        output = output + potential_200_low[x] + '\n'
+    output += '200以上:\n'
+    for y in random.sample(range(0,len(potential_200_up)-1),2):
+        output = output + potential_200_up[y] + '\n'
+    return output + '\n' + '來吃爆囉'
 
 # Channel Access Token
 line_bot_api = LineBotApi('03lCKiHH72CQak6lrU9vdhwyu5HUDEeihF4bQIxokPtct6L03QXfkHhvoFZI579Z95i9hdkX6eRbOWDOB+t0XwJMv/D70W7/x3wBX4+wCldtj4WpF7QC2yqClPExW/nrOUZMZJakON6zJsgAuR8N5wdB04t89/1O/w1cDnyilFU=')
@@ -42,13 +52,13 @@ def callback():
     return 'OK'
 
 
-@handler.add(MessageEvent, message=TextMessage) # 處理文字訊息（message = TextMessage），圖片
+@handler.add(MessageEvent, message=TextMessage) # 處理文字訊息（message = TextMessage）
 def handle_message(event):
     text = event.message.text # 使用者傳的訊息存成變數 text
 
     if  text == '發票':
         buttons_template = ButtonsTemplate(
-            thumbnail_image_url='https://i.imgur.com/fIKfTIi.jpg',title='My buttons sample', text=a[2], actions=[
+            thumbnail_image_url='https://i.imgur.com/fIKfTIi.jpg',title='My buttons sample', text='哈', actions=[
                 URIAction(label='Go to line.me', uri='https://line.me'),
                 PostbackAction(label='ping', data='ping'),
                 PostbackAction(label='ping with text', data='ping', text='ping'),
@@ -57,6 +67,8 @@ def handle_message(event):
         template_message = TemplateSendMessage(
             alt_text='Buttons alt text', template=buttons_template)
         line_bot_api.reply_message(event.reply_token, template_message) # 送出訊息，訊息內容為'template_message'
+    elif '_' in text:
+         line_bot_api.reply_message(event.reply_token, rest_selector(text))
     elif text == '吃吃':
         carousel_template = CarouselTemplate(columns=[
             CarouselColumn(text='大門',thumbnail_image_url='https://i.imgur.com/fIKfTIi.jpg', actions=[
