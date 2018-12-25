@@ -101,7 +101,7 @@ def handle_message(event):
         bubble = BubbleContainer(
             direction='ltr',
             hero=ImageComponent(
-                url='https://i.imgur.com/wT9Rjq7.jpg',
+                url='http://imagizer.imageshack.com/v2/653x490q90/r/924/kQopvg.jpg',
                 size='full',
                 aspect_ratio='20:13',
                 aspect_mode='cover',
@@ -111,7 +111,7 @@ def handle_message(event):
                 layout='vertical',
                 contents=[
                     # title
-                    TextComponent(text='Brown Cafe', weight='bold', size='xl'),
+                    TextComponent(text='大一女金閣屋(飯)', weight='bold', size='xl'),
                     # review
                     BoxComponent(
                         layout='baseline',
@@ -122,8 +122,6 @@ def handle_message(event):
                             IconComponent(size='sm', url='https://example.com/gold_star.png'),
                             IconComponent(size='sm', url='https://example.com/gold_star.png'),
                             IconComponent(size='sm', url='https://example.com/grey_star.png'),
-                            TextComponent(text='4.0', size='sm', color='#999999', margin='md',
-                                          flex=0)
                         ]
                     ),
                     # info
@@ -137,13 +135,13 @@ def handle_message(event):
                                 spacing='sm',
                                 contents=[
                                     TextComponent(
-                                        text='Place',
+                                        text='評價',
                                         color='#aaaaaa',
                                         size='sm',
                                         flex=1
                                     ),
                                     TextComponent(
-                                        text='Shinjuku, Tokyo',
+                                        text='4.0 / 5.0',
                                         wrap=True,
                                         color='#666666',
                                         size='sm',
@@ -156,13 +154,51 @@ def handle_message(event):
                                 spacing='sm',
                                 contents=[
                                     TextComponent(
-                                        text='Time',
+                                        text='平均價位',
                                         color='#aaaaaa',
                                         size='sm',
                                         flex=1
                                     ),
                                     TextComponent(
-                                        text="10:00 - 23:00",
+                                        text='NT$ 75',
+                                        wrap=True,
+                                        color='#666666',
+                                        size='sm',
+                                        flex=5,
+                                    ),
+                                ],
+                            ),
+                            BoxComponent(
+                                layout='baseline',
+                                spacing='sm',
+                                contents=[
+                                    TextComponent(
+                                        text='營業時間',
+                                        color='#aaaaaa',
+                                        size='sm',
+                                        flex=1
+                                    ),
+                                    TextComponent(
+                                        text='星期日~五 11:00~14:30 ; 17:00~20:00',
+                                        wrap=True,
+                                        color='#666666',
+                                        size='sm',
+                                        flex=5,
+                                    ),
+                                ],
+                            ),
+                            BoxComponent(
+                                layout='baseline',
+                                spacing='sm',
+                                contents=[
+                                    TextComponent(
+                                        text='地址',
+                                        color='#aaaaaa',
+                                        size='sm',
+                                        flex=1
+                                    ),
+                                    TextComponent(
+                                        text='台大大一女宿舍餐廳',
                                         wrap=True,
                                         color='#666666',
                                         size='sm',
