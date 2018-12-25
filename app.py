@@ -83,7 +83,8 @@ def handle_message(event):
             alt_text='Buttons alt text', template=buttons_template)
         line_bot_api.reply_message(event.reply_token, template_message) # 送出訊息，訊息內容為'template_message'
     elif '_' in text:
-         line_bot_api.reply_message(event.reply_token, rest_selector(text))
+        message = TextSendMessage(text=rest_selector(text))
+        line_bot_api.reply_message(event.reply_token, message)
     elif text == '吃吃':
         carousel_template = CarouselTemplate(columns=[
             CarouselColumn(text='大門',thumbnail_image_url='https://i.imgur.com/fIKfTIi.jpg', actions=[
