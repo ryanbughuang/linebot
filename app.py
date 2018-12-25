@@ -100,7 +100,6 @@ def handle_message(event):
     elif text == 'flex' or text == '推薦':
         bubble = BubbleContainer(
             direction='ltr',
-            #餐廳示意圖
             hero=ImageComponent(
                 url='https://i.imgur.com/wT9Rjq7.jpg',
                 size='full',
@@ -112,9 +111,6 @@ def handle_message(event):
                 layout='vertical',
                 contents=[
                     # title
-<<<<<<< HEAD
-                    TextComponent(text='大一女金閣屋(飯)', weight='bold', size='xl'),
-=======
                     TextComponent(text='Brown Cafe', weight='bold', size='xl'),
                     # review
                     BoxComponent(
@@ -130,7 +126,6 @@ def handle_message(event):
                                           flex=0)
                         ]
                     ),
->>>>>>> parent of 4dc1575... flex 格式修改
                     # info
                     BoxComponent(
                         layout='vertical',
@@ -201,6 +196,11 @@ def handle_message(event):
                     )
                 ]
             ),
+        )
+        message = FlexSendMessage(alt_text="hello", contents=bubble)
+        line_bot_api.reply_message(
+            event.reply_token,
+            message
         )
         message = FlexSendMessage(alt_text="hello", contents=bubble)
         line_bot_api.reply_message(
