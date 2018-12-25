@@ -6,7 +6,7 @@ import sys
 import tempfile
 from argparse import ArgumentParser
 from flask import Flask, request, abort
-
+import random
 from linebot import (
     LineBotApi, WebhookHandler
 )
