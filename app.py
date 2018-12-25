@@ -107,6 +107,11 @@ def handle_message(event):
                 MessageAction(label='麵', text='118巷_麵'),
                 MessageAction(label='其他', text='118巷_其他')
             ]),
+            CarouselColumn(text='校內',thumbnail_image_url='https://i.imgur.com/fIKfTIi.jpg', actions=[
+                MessageAction(label='飯', text='校內_飯'),
+                MessageAction(label='麵', text='校內_麵'),
+                MessageAction(label='其他', text='校內_其他')
+            ]),
         ])
         template_message = TemplateSendMessage(
             alt_text='Carousel alt text', template=carousel_template)
