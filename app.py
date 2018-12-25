@@ -100,6 +100,7 @@ def handle_message(event):
     elif text == 'flex' or text == '推薦':
         bubble = BubbleContainer(
             direction='ltr',
+            #餐廳示意圖
             hero=ImageComponent(
                 url='http://imagizer.imageshack.com/v2/653x490q90/r/924/kQopvg.jpg',
                 size='full',
@@ -112,18 +113,6 @@ def handle_message(event):
                 contents=[
                     # title
                     TextComponent(text='大一女金閣屋(飯)', weight='bold', size='xl'),
-                    # review
-                    BoxComponent(
-                        layout='baseline',
-                        margin='md',
-                        contents=[
-                            IconComponent(size='sm', url='https://example.com/gold_star.png'),
-                            IconComponent(size='sm', url='https://example.com/grey_star.png'),
-                            IconComponent(size='sm', url='https://example.com/gold_star.png'),
-                            IconComponent(size='sm', url='https://example.com/gold_star.png'),
-                            IconComponent(size='sm', url='https://example.com/grey_star.png'),
-                        ]
-                    ),
                     # info
                     BoxComponent(
                         layout='vertical',
