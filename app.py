@@ -1,5 +1,6 @@
 from __future__ import unicode_literals
 import pandas as pd
+import numpy as np
 import errno
 import os
 import sys
@@ -24,12 +25,26 @@ def rest_selector(reply_text):
     potential_200_low = all_restaurant['restaurant'][(all_restaurant.type2 == res_type) & (all_restaurant.loc_type == res_loc) & (all_restaurant.price <= 200)].tolist()
     potential_200_up = all_restaurant['restaurant'][(all_restaurant.type2 == res_type) & (all_restaurant.loc_type == res_loc) & (all_restaurant.price >= 200)].tolist()
     output = '200以下:\n'
-    for x in random.sample(range(0,len(potential_200_low)-1),2):
-        output = output + potential_200_low[x] + '\n'
+    if len(potential_200_low) > 2:
+        for x in np.random.choice(len(potential_200_low),2,replace=False).tolist():
+            output = output + potential_200_low[x] + '\n'
+
+    elif len(potential_200_low) > 0:
+        for i in potential_200_low:
+            output += i+'\n'
+    else:
+        output += '無\n'
+
     output += '200以上:\n'
-    for y in random.sample(range(0,len(potential_200_up)-1),2):
-        output = output + potential_200_up[y] + '\n'
-    return output + '\n' + '來吃爆囉'
+    if len(potential_200_up) > 2:
+        for y in np.random.choice(len(potential_200_up),2,replace=False).tolist():
+            output = output + potential_200_up[y] + '\n'
+    elif len(potential_200_up) > 0:
+        for j in potential_200_up:
+            output += j+'\n'
+    else:
+        output += '無\n'
+    return output
 
 # Channel Access Token
 line_bot_api = LineBotApi('03lCKiHH72CQak6lrU9vdhwyu5HUDEeihF4bQIxokPtct6L03QXfkHhvoFZI579Z95i9hdkX6eRbOWDOB+t0XwJMv/D70W7/x3wBX4+wCldtj4WpF7QC2yqClPExW/nrOUZMZJakON6zJsgAuR8N5wdB04t89/1O/w1cDnyilFU=')
@@ -86,10 +101,10 @@ def handle_message(event):
                 MessageAction(label='麵', text='溫州_麵'),
                 MessageAction(label='其他', text='溫州_其他')
             ]),
-            CarouselColumn(text='後門',thumbnail_image_url='https://i.imgur.com/fIKfTIi.jpg', actions=[
-                MessageAction(label='飯', text='後門_飯'),
-                MessageAction(label='麵', text='後門_麵'),
-                MessageAction(label='其他', text='後門_其他')
+            CarouselColumn(text='118巷',thumbnail_image_url='https://i.imgur.com/fIKfTIi.jpg', actions=[
+                MessageAction(label='飯', text='118巷_飯'),
+                MessageAction(label='麵', text='118巷_麵'),
+                MessageAction(label='其他', text='118巷_其他')
             ]),
         ])
         template_message = TemplateSendMessage(
