@@ -53,8 +53,8 @@ def rest_selector(reply_text): #待改進：如果某類型沒有餐廳就不要
         action_150_up.extend([MessageAction(label='--',text='吃吃')] * n)
     
     carousel_template = CarouselTemplate(columns=[
-                CarouselColumn(text='甲粗飽',thumbnail_image_url='https://i.imgur.com/fIKfTIi.jpg', actions=action_150_low),
-                CarouselColumn(text='大吃爆',thumbnail_image_url='https://i.imgur.com/fIKfTIi.jpg', actions=action_150_up),
+                CarouselColumn(text='甲粗飽',thumbnail_image_url='https://imageshack.com/a/img924/2488/KLllaU.jpg', actions=action_150_low),
+                CarouselColumn(text='大吃爆',thumbnail_image_url='https://imageshack.com/a/img924/5194/PrGO0e.jpg', actions=action_150_up),
             ])
     template_message = TemplateSendMessage(
         alt_text='Carousel alt text', template=carousel_template)
@@ -300,27 +300,27 @@ def handle_message(event):
         line_bot_api.reply_message(event.reply_token, message)
     elif text == '吃吃':
         carousel_template = CarouselTemplate(columns=[
-            CarouselColumn(text='大門',thumbnail_image_url='https://i.imgur.com/fIKfTIi.jpg', actions=[
+            CarouselColumn(text='大門',thumbnail_image_url='https://imageshack.com/a/img922/5797/bmTsZR.jpg', actions=[
                 MessageAction(label='飯', text='大門_飯'),
                 MessageAction(label='麵', text='大門_麵'),
                 MessageAction(label='其他', text='大門_其他')
             ]),
-            CarouselColumn(text='公館',thumbnail_image_url='https://i.imgur.com/fIKfTIi.jpg', actions=[
+            CarouselColumn(text='公館',thumbnail_image_url='https://imageshack.com/a/img924/4281/roaxOD.jpg', actions=[
                 MessageAction(label='飯', text='公館_飯'),
                 MessageAction(label='麵', text='公館_麵'),
                 MessageAction(label='其他', text='公館_其他')
             ]),
-            CarouselColumn(text='溫州街',thumbnail_image_url='https://i.imgur.com/fIKfTIi.jpg', actions=[
+            CarouselColumn(text='溫州街',thumbnail_image_url='https://imageshack.com/a/img922/9151/pWvlUR.jpg', actions=[
                 MessageAction(label='飯', text='溫州街_飯'),
                 MessageAction(label='麵', text='溫州街_麵'),
                 MessageAction(label='其他', text='溫州街_其他')
             ]),
-            CarouselColumn(text='118巷',thumbnail_image_url='https://i.imgur.com/fIKfTIi.jpg', actions=[
+            CarouselColumn(text='118巷',thumbnail_image_url='https://imageshack.com/a/img924/3011/UmlTNT.jpg', actions=[
                 MessageAction(label='飯', text='118巷_飯'),
                 MessageAction(label='麵', text='118巷_麵'),
                 MessageAction(label='其他', text='118巷_其他')
             ]),
-            CarouselColumn(text='校內',thumbnail_image_url='https://i.imgur.com/fIKfTIi.jpg', actions=[
+            CarouselColumn(text='校內',thumbnail_image_url='https://imageshack.com/a/img922/6195/bMNTVQ.jpg', actions=[
                 MessageAction(label='飯', text='校內_飯'),
                 MessageAction(label='麵', text='校內_麵'),
                 MessageAction(label='其他', text='校內_其他')
