@@ -67,6 +67,108 @@ def rest_recommender(reply_text):
 
     restaurant = reply_text[reply_text.find('@')+1:]
     return False
+	
+def rest_con(reply_text):
+    res_eat, res_name = reply_text.split('@')
+    res_location = all_restaurant['location'][all_restaurant.restaurant == res_name].tolist()
+    res_menu = 	all_restaurant['menu pic'][all_restaurant.restaurant == res_name].tolist()
+    res_open = all_restaurant['open hour'][all_restaurant.restaurant == res_name].tolist()
+    location_txt = '' ; menu_txt = '' ; open_txt = ''
+    for i in res_location:
+        location_txt += i
+    for i in res_menu:
+        menu_txt += i
+    for i in res_open:
+        open_txt += i    
+	
+    bubble = BubbleContainer(
+            direction='ltr',
+            hero=ImageComponent(
+                url='https://i.imgur.com/wT9Rjq7.jpg',
+                size='full',
+                aspect_ratio='20:13',
+                aspect_mode='cover',
+                action=URIAction(uri='http://example.com', label='label')
+            ),
+            body=BoxComponent(
+                layout='vertical',
+                contents=[
+                    # title
+                    TextComponent(text=res_name, weight='bold', size='xl'),
+                    # review
+                    # info
+                    BoxComponent(
+                        layout='vertical',
+                        margin='lg',
+                        spacing='sm',
+                        contents=[
+                            BoxComponent(
+                                layout='baseline',
+                                spacing='sm',
+                                contents=[
+                                    TextComponent(
+                                        text='Place',
+                                        color='#aaaaaa',
+                                        size='sm',
+                                        flex=1
+                                    ),
+                                    TextComponent(
+                                        text=location_txt,
+                                        wrap=True,
+                                        color='#666666',
+                                        size='sm',
+                                        flex=5
+                                    )
+                                ],
+                            ),
+                            BoxComponent(
+                                layout='baseline',
+                                spacing='sm',
+                                contents=[
+                                    TextComponent(
+                                        text='Time',
+                                        color='#aaaaaa',
+                                        size='sm',
+                                        flex=1
+                                    ),
+                                    TextComponent(
+                                        text=open_txt,
+                                        wrap=True,
+                                        color='#666666',
+                                        size='sm',
+                                        flex=5,
+                                    ),
+                                ],
+                            ),
+                        ],
+                    )
+                ],
+            ),
+            footer=BoxComponent(
+                layout='vertical',
+                spacing='sm',
+                contents=[
+                    # callAction, separator, websiteAction
+                    SpacerComponent(size='sm'),
+                    # callAction
+                    ButtonComponent(
+                        style='link',
+                        height='sm',
+                        action=URIAction(label='CALL', uri='tel:000000'),
+                    ),
+                    # separator
+                    SeparatorComponent(),
+                    # websiteAction
+                    ButtonComponent(
+                        style='link',
+                        height='sm',
+                        action=URIAction(label='Menu', uri=menu_txt)
+                    )
+                ]
+            ),
+        )
+    message = FlexSendMessage(alt_text="hello", contents=bubble)
+    return message
 
 
 # Channel Access Token
@@ -108,6 +210,9 @@ def handle_message(event):
     # 回覆吃吃的回傳訊息
     elif '_' in text:
         message = rest_selector(text)
+        line_bot_api.reply_message(event.reply_token, message)
+    elif '@' in text:
+        message = rest_con(text)
         line_bot_api.reply_message(event.reply_token, message)
     elif text == '吃吃':
         carousel_template = CarouselTemplate(columns=[
