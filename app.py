@@ -60,13 +60,6 @@ def rest_selector(reply_text): #待改進：如果某類型沒有餐廳就不要
         alt_text='Carousel alt text', template=carousel_template)
 
     return template_message
-
-def rest_recommender(reply_text):
-        # import the restaurant data
-    all_restaurant = pd.read_csv('https://docs.google.com/spreadsheets/d/e/2PACX-1vRR3IygA5p4RzvLnqct1YS_5PngAP9ANKdcK0fhTuWEI6zA52YrqFyS-dBex3b6lcqt5WM4kQE0r3Oh/pub?output=csv',header=0)
-
-    restaurant = reply_text[reply_text.find('@')+1:]
-    return False
 	
 def rest_con(reply_text):
     res_eat, res_name = reply_text.split('@')
