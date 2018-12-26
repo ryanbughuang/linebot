@@ -166,7 +166,7 @@ def random_res_recommand():
     res_menu =  all_restaurant['menu pic'][all_restaurant.restaurant == res_name].tolist()
     res_open = all_restaurant['open hour'][all_restaurant.restaurant == res_name].tolist()
     res_food_pic = all_restaurant['food pic'][all_restaurant.restaurant == res_name].tolist()
-       bubble = BubbleContainer(
+    bubble = BubbleContainer(
             direction='ltr',
             hero=ImageComponent(
                 url=res_food_pic[0],
@@ -252,6 +252,7 @@ def random_res_recommand():
                 ]
             ),
         )
+    
     message = FlexSendMessage(alt_text="hello", contents=bubble)
     return message
 # Channel Access Token
