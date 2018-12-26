@@ -162,17 +162,14 @@ def random_res_recommand():
     all_restaurant = pd.read_csv('https://docs.google.com/spreadsheets/d/e/2PACX-1vRR3IygA5p4RzvLnqct1YS_5PngAP9ANKdcK0fhTuWEI6zA52YrqFyS-dBex3b6lcqt5WM4kQE0r3Oh/pub?output=csv',header=0)
     res_list = all_restaurant['restaurant'].tolist()
     res_name = res_list[np.random.choice(len(res_list),1,replace=False)[0]]
-    res_rate = all_restaurant['rate'][all_restaurant.restaurant == res_name].tolist()[0]
-    res_price = all_restaurant['price'][all_restaurant.restaurant == res_name].tolist()[0]
-    res_open = all_restaurant['open hour'][all_restaurant.restaurant == res_name].tolist()[0]
-    res_location = all_restaurant['location'][all_restaurant.restaurant == res_name].tolist()[0]
-    res_menu =  all_restaurant['menu pic'][all_restaurant.restaurant == res_name].tolist()[0]
-    res_food_pic = all_restaurant['food pic'][all_restaurant.restaurant == res_name].tolist()[0]
-
-    bubble = BubbleContainer(
+    res_location = all_restaurant['location'][all_restaurant.restaurant == res_name].tolist()
+    res_menu =  all_restaurant['menu pic'][all_restaurant.restaurant == res_name].tolist()
+    res_open = all_restaurant['open hour'][all_restaurant.restaurant == res_name].tolist()
+    res_food_pic = all_restaurant['food pic'][all_restaurant.restaurant == res_name].tolist()
+       bubble = BubbleContainer(
             direction='ltr',
             hero=ImageComponent(
-                url=res_food_pic,
+                url=res_food_pic[0],
                 size='full',
                 aspect_ratio='20:13',
                 aspect_mode='cover',
@@ -183,6 +180,7 @@ def random_res_recommand():
                 contents=[
                     # title
                     TextComponent(text=res_name, weight='bold', size='xl'),
+                    # review
                     # info
                     BoxComponent(
                         layout='vertical',
@@ -194,32 +192,13 @@ def random_res_recommand():
                                 spacing='sm',
                                 contents=[
                                     TextComponent(
-                                        text='Rate',
+                                        text='Place',
                                         color='#aaaaaa',
                                         size='sm',
                                         flex=1
                                     ),
                                     TextComponent(
-                                        text=res_rate,
-                                        wrap=True,
-                                        color='#666666',
-                                        size='sm',
-                                        flex=5
-                                    )
-                                ],
-                            ),
-                            BoxComponent(
-                                layout='baseline',
-                                spacing='sm',
-                                contents=[
-                                    TextComponent(
-                                        text='Price',
-                                        color='#aaaaaa',
-                                        size='sm',
-                                        flex=1
-                                    ),
-                                    TextComponent(
-                                        text=res_price,
+                                        text=res_location[0],
                                         wrap=True,
                                         color='#666666',
                                         size='sm',
@@ -238,31 +217,12 @@ def random_res_recommand():
                                         flex=1
                                     ),
                                     TextComponent(
-                                        text=res_open,
+                                        text=res_open[0],
                                         wrap=True,
                                         color='#666666',
                                         size='sm',
                                         flex=5,
                                     ),
-                                ],
-                            ),
-                            BoxComponent(
-                                layout='baseline',
-                                spacing='sm',
-                                contents=[
-                                    TextComponent(
-                                        text='Place',
-                                        color='#aaaaaa',
-                                        size='sm',
-                                        flex=1
-                                    ),
-                                    TextComponent(
-                                        text=res_location,
-                                        wrap=True,
-                                        color='#666666',
-                                        size='sm',
-                                        flex=5
-                                    )
                                 ],
                             ),
                         ],
@@ -287,7 +247,7 @@ def random_res_recommand():
                     ButtonComponent(
                         style='link',
                         height='sm',
-                        action=URIAction(label='Menu', uri=res_menu)
+                        action=URIAction(label='Menu', uri=res_menu[0])
                     )
                 ]
             ),
