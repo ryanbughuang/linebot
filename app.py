@@ -68,7 +68,6 @@ def rest_con(reply_text):
     res_menu = 	all_restaurant['menu pic'][all_restaurant.restaurant == res_name].tolist()
     res_open = all_restaurant['open hour'][all_restaurant.restaurant == res_name].tolist()
     res_food_pic = all_restaurant['food pic'][all_restaurant.restaurant == res_name].tolist()
-    location_txt = '' ; menu_txt = '' ; open_txt = ''
 
     bubble = BubbleContainer(
             direction='ltr',
