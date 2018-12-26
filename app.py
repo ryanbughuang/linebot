@@ -62,6 +62,7 @@ def rest_selector(reply_text): #待改進：如果某類型沒有餐廳就不要
     return template_message
 	
 def rest_con(reply_text):
+    all_restaurant = pd.read_csv('https://docs.google.com/spreadsheets/d/e/2PACX-1vRR3IygA5p4RzvLnqct1YS_5PngAP9ANKdcK0fhTuWEI6zA52YrqFyS-dBex3b6lcqt5WM4kQE0r3Oh/pub?output=csv',header=0)
     res_eat, res_name = reply_text.split('@')
     res_location = all_restaurant['location'][all_restaurant.restaurant == res_name].tolist()
     res_menu = 	all_restaurant['menu pic'][all_restaurant.restaurant == res_name].tolist()
