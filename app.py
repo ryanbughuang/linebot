@@ -18,33 +18,42 @@ from linebot.models import *
 
 app = Flask(__name__)
 
-#
+# 讀入餐廳資料
 all_restaurant = pd.read_csv('https://docs.google.com/spreadsheets/d/e/2PACX-1vRR3IygA5p4RzvLnqct1YS_5PngAP9ANKdcK0fhTuWEI6zA52YrqFyS-dBex3b6lcqt5WM4kQE0r3Oh/pub?output=csv',header=0)
+# 依照 地點_類型 的輸入選擇餐廳，輸出為carousel message
 def rest_selector(reply_text):
     res_loc, res_type = reply_text.split('_')
-    potential_200_low = all_restaurant['restaurant'][(all_restaurant.type2 == res_type) & (all_restaurant.loc_type == res_loc) & (all_restaurant.price <= 200)].tolist()
-    potential_200_up = all_restaurant['restaurant'][(all_restaurant.type2 == res_type) & (all_restaurant.loc_type == res_loc) & (all_restaurant.price >= 200)].tolist()
-    output = '200以下:\n'
-    if len(potential_200_low) > 2:
-        for x in np.random.choice(len(potential_200_low),2,replace=False).tolist():
-            output = output + potential_200_low[x] + '\n'
-
-    elif len(potential_200_low) > 0:
-        for i in potential_200_low:
-            output += i+'\n'
+    potential_150_low = all_restaurant['restaurant'][(all_restaurant.type2 == res_type) & (all_restaurant.loc_type == res_loc) & (all_restaurant.price <= 150)].tolist()
+    potential_150_up = all_restaurant['restaurant'][(all_restaurant.type2 == res_type) & (all_restaurant.loc_type == res_loc) & (all_restaurant.price >= 150)].tolist()
+    if len(potential_150_low) >=3:
+        potential_150_low = [potential_150_low[i] for i in np.random.choice(len(potential_150_low),3,replace=False).tolist()]
+    if len(potential_150_up) >=3:
+        potential_150_up = [potential_150_up[i] for i in np.random.choice(len(potential_150_up),3,replace=False).tolist()] 
+    
+    # create actions for below 150 restaurant
+    action_150_low = []
+    if not potential_150_low:
+        action_150_low.append(MessageAction(label='試試別的',text='吃吃'))
     else:
-        output += '無\n'
-
-    output += '200以上:\n'
-    if len(potential_200_up) > 2:
-        for y in np.random.choice(len(potential_200_up),2,replace=False).tolist():
-            output = output + potential_200_up[y] + '\n'
-    elif len(potential_200_up) > 0:
-        for j in potential_200_up:
-            output += j+'\n'
+        for i in potential_150_low:
+            action_150_low.append(MessageAction(label=i,text='吃@'+i))
+    
+    # create actions for above 150 restaurant
+    action_150_up = []
+    if not potential_150_up:
+        action_150_up.append(MessageAction(label='試試別的',text='吃吃'))
     else:
-        output += '無\n'
-    return output
+        for j in potential_150_up:
+            action_150_up.append(MessageAction(label=j,text='吃@'+j))
+
+    carousel_template = CarouselTemplate(columns=[
+                CarouselColumn(text='甲粗飽',thumbnail_image_url='https://i.imgur.com/fIKfTIi.jpg', actions=action_150_low),
+                CarouselColumn(text='大吃爆',thumbnail_image_url='https://i.imgur.com/fIKfTIi.jpg', actions=action_150_up),
+            ])
+    template_message = TemplateSendMessage(
+        alt_text='Carousel alt text', template=carousel_template)
+
+    return template_message
 
 # Channel Access Token
 line_bot_api = LineBotApi('03lCKiHH72CQak6lrU9vdhwyu5HUDEeihF4bQIxokPtct6L03QXfkHhvoFZI579Z95i9hdkX6eRbOWDOB+t0XwJMv/D70W7/x3wBX4+wCldtj4WpF7QC2yqClPExW/nrOUZMZJakON6zJsgAuR8N5wdB04t89/1O/w1cDnyilFU=')
@@ -82,8 +91,9 @@ def handle_message(event):
         template_message = TemplateSendMessage(
             alt_text='Buttons alt text', template=buttons_template)
         line_bot_api.reply_message(event.reply_token, template_message) # 送出訊息，訊息內容為'template_message'
+    # 回覆吃吃的回傳訊息
     elif '_' in text:
-        message = TextSendMessage(text=rest_selector(text))
+        message = rest_selector(text)
         line_bot_api.reply_message(event.reply_token, message)
     elif text == '吃吃':
         carousel_template = CarouselTemplate(columns=[
