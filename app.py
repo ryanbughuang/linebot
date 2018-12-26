@@ -162,12 +162,12 @@ def random_res_recommand():
     all_restaurant = pd.read_csv('https://docs.google.com/spreadsheets/d/e/2PACX-1vRR3IygA5p4RzvLnqct1YS_5PngAP9ANKdcK0fhTuWEI6zA52YrqFyS-dBex3b6lcqt5WM4kQE0r3Oh/pub?output=csv',header=0)
     res_list = all_restaurant['restaurant'].tolist()
     res_name = res_list[np.random.choice(len(res_list),1,replace=False)[0]]
-    res_rate = all_restaurant['rate'][all_restaurant.restaurant == res_name]
-    res_price = all_restaurant['price'][all_restaurant.restaurant == res_name]
-    res_open = all_restaurant['open hour'][all_restaurant.restaurant == res_name]
-    res_location = all_restaurant['location'][all_restaurant.restaurant == res_name]
-    res_menu =  all_restaurant['menu pic'][all_restaurant.restaurant == res_name]
-    res_food_pic = all_restaurant['food pic'][all_restaurant.restaurant == res_name]
+    res_rate = all_restaurant['rate'][all_restaurant.restaurant == res_name].tolist()[0]
+    res_price = all_restaurant['price'][all_restaurant.restaurant == res_name].tolist()[0]
+    res_open = all_restaurant['open hour'][all_restaurant.restaurant == res_name].tolist()[0]
+    res_location = all_restaurant['location'][all_restaurant.restaurant == res_name].tolist()[0]
+    res_menu =  all_restaurant['menu pic'][all_restaurant.restaurant == res_name].tolist()[0]
+    res_food_pic = all_restaurant['food pic'][all_restaurant.restaurant == res_name].tolist()[0]
 
     bubble = BubbleContainer(
             direction='ltr',
