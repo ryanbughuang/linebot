@@ -18,9 +18,11 @@ from linebot.models import *
 
 app = Flask(__name__)
 
-#
-all_restaurant = pd.read_csv('https://docs.google.com/spreadsheets/d/e/2PACX-1vRR3IygA5p4RzvLnqct1YS_5PngAP9ANKdcK0fhTuWEI6zA52YrqFyS-dBex3b6lcqt5WM4kQE0r3Oh/pub?output=csv',header=0)
-def rest_selector(reply_text):
+
+
+def rest_selector(reply_text): #待改進：如果某類型沒有餐廳就不要輸出
+    # import the restaurant data
+    all_restaurant = pd.read_csv('https://docs.google.com/spreadsheets/d/e/2PACX-1vRR3IygA5p4RzvLnqct1YS_5PngAP9ANKdcK0fhTuWEI6zA52YrqFyS-dBex3b6lcqt5WM4kQE0r3Oh/pub?output=csv',header=0)
     res_loc, res_type = reply_text.split('_')
     potential_150_low = all_restaurant['restaurant'][(all_restaurant.type2 == res_type) & (all_restaurant.loc_type == res_loc) & (all_restaurant.price <= 150)].tolist()
     potential_150_up = all_restaurant['restaurant'][(all_restaurant.type2 == res_type) & (all_restaurant.loc_type == res_loc) & (all_restaurant.price > 150)].tolist()
@@ -29,7 +31,7 @@ def rest_selector(reply_text):
     if len(potential_150_up) >=3:
         potential_150_up = [potential_150_up[i] for i in np.random.choice(len(potential_150_up),3,replace=False).tolist()] 
     
-    # create actions for below 150 restaurant
+    # create actions for below $150 restaurant
     action_150_low = []
     if not potential_150_low:
         action_150_low.append(MessageAction(label='試試別的',text='吃吃'))
@@ -39,7 +41,7 @@ def rest_selector(reply_text):
     if len(action_150_low) < 3:
         n = 3 - len(action_150_low)
         action_150_low.extend([MessageAction(label='--',text='吃吃')] * n)
-    # create actions for above 150 restaurant
+    # create actions for above $150 restaurant
     action_150_up = []
     if not potential_150_up:
         action_150_up.append(MessageAction(label='試試別的',text='吃吃'))
@@ -58,6 +60,14 @@ def rest_selector(reply_text):
         alt_text='Carousel alt text', template=carousel_template)
 
     return template_message
+
+def rest_recommender(reply_text):
+        # import the restaurant data
+    all_restaurant = pd.read_csv('https://docs.google.com/spreadsheets/d/e/2PACX-1vRR3IygA5p4RzvLnqct1YS_5PngAP9ANKdcK0fhTuWEI6zA52YrqFyS-dBex3b6lcqt5WM4kQE0r3Oh/pub?output=csv',header=0)
+
+    restaurant = reply_text[reply_text.find('@')+1:]
+    return False
+
 
 # Channel Access Token
 line_bot_api = LineBotApi('03lCKiHH72CQak6lrU9vdhwyu5HUDEeihF4bQIxokPtct6L03QXfkHhvoFZI579Z95i9hdkX6eRbOWDOB+t0XwJMv/D70W7/x3wBX4+wCldtj4WpF7QC2yqClPExW/nrOUZMZJakON6zJsgAuR8N5wdB04t89/1O/w1cDnyilFU=')
@@ -245,15 +255,7 @@ def handle_message(event):
             ),
         )
         message = FlexSendMessage(alt_text="hello", contents=bubble)
-        line_bot_api.reply_message(
-            event.reply_token,
-            message
-        )
-        message = FlexSendMessage(alt_text="hello", contents=bubble)
-        line_bot_api.reply_message(
-            event.reply_token,
-            message
-        )
+        line_bot_api.reply_message(event.reply_token,message)
     else:
         message = TextSendMessage(text=event.message.text)
         line_bot_api.reply_message(event.reply_token, message)
