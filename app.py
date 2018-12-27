@@ -97,6 +97,25 @@ def rest_con(reply_text):
                                 spacing='sm',
                                 contents=[
                                     TextComponent(
+                                        text='Place',
+                                        color='#aaaaaa',
+                                        size='sm',
+                                        flex=1
+                                    ),
+                                    TextComponent(
+                                        text=res_location[0],
+                                        wrap=True,
+                                        color='#666666',
+                                        size='sm',
+                                        flex=5
+                                    )
+                                ],
+                            ),
+                            BoxComponent(
+                                layout='baseline',
+                                spacing='sm',
+                                contents=[
+                                    TextComponent(
                                         text='Time',
                                         color='#aaaaaa',
                                         size='sm',
@@ -123,6 +142,25 @@ def rest_con(reply_text):
                                     ),
                                     TextComponent(
                                         text=res_price[0],
+                                        wrap=True,
+                                        color='#666666',
+                                        size='sm',
+                                        flex=5,
+                                    ),
+                                ],
+                            ),
+                            BoxComponent(
+                                layout='baseline',
+                                spacing='sm',
+                                contents=[
+                                    TextComponent(
+                                        text='Rate',
+                                        color='#aaaaaa',
+                                        size='sm',
+                                        flex=1
+                                    ),
+                                    TextComponent(
+                                        text=res_rate[0],
                                         wrap=True,
                                         color='#666666',
                                         size='sm',
