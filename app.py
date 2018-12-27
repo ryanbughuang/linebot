@@ -70,8 +70,6 @@ def rest_con(reply_text):
     res_food_pic = all_restaurant['food pic'][all_restaurant.restaurant == res_name].tolist()
     res_price = all_restaurant['price'][all_restaurant.restaurant == res_name].tolist()
     res_rate = all_restaurant['rate'][all_restaurant.restaurant == res_name].tolist()
-	res_rate[0] = str(res_rate[0])
-	res_price[0] = str(res_price[0])
 
     bubble = BubbleContainer(
             direction='ltr',
@@ -99,13 +97,13 @@ def rest_con(reply_text):
                                 spacing='sm',
                                 contents=[
                                     TextComponent(
-                                        text='Price',
+                                        text='Place',
                                         color='#aaaaaa',
                                         size='sm',
                                         flex=1
                                     ),
                                     TextComponent(
-                                        text=res_price[0],
+                                        text=res_location[0],
                                         wrap=True,
                                         color='#666666',
                                         size='sm',
