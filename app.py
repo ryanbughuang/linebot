@@ -97,13 +97,13 @@ def rest_con(reply_text):
                                 spacing='sm',
                                 contents=[
                                     TextComponent(
-                                        text='Place',
+                                        text='Price',
                                         color='#aaaaaa',
                                         size='sm',
                                         flex=1
                                     ),
                                     TextComponent(
-                                        text=res_location[0],
+                                        text=res_price[0],
                                         wrap=True,
                                         color='#666666',
                                         size='sm',
