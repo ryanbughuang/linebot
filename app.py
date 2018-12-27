@@ -98,7 +98,7 @@ def rest_con(reply_text):
                                 spacing='sm',
                                 contents=[
                                     TextComponent(
-                                        text='Rate',
+                                        text='評價:',
                                         color='#aaaaaa',
                                         size='sm',
                                         flex=1
@@ -117,7 +117,7 @@ def rest_con(reply_text):
                                 spacing='sm',
                                 contents=[
                                     TextComponent(
-                                        text='Time',
+                                        text='營業:',
                                         color='#aaaaaa',
                                         size='sm',
                                         flex=1
@@ -153,7 +153,7 @@ def rest_con(reply_text):
                     ButtonComponent(
                         style='link',
                         height='sm',
-                        action=URIAction(label='Menu', uri=res_menu[0])
+                        action=URIAction(label='點我看菜單', uri=res_menu[0])
                     )
                 ]
             ),
