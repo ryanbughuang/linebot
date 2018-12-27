@@ -68,8 +68,6 @@ def rest_con(reply_text):
     res_menu =  all_restaurant['menu pic'][all_restaurant.restaurant == res_name].tolist()
     res_open = all_restaurant['open hour'][all_restaurant.restaurant == res_name].tolist()
     res_food_pic = all_restaurant['food pic'][all_restaurant.restaurant == res_name].tolist()
-    res_price = all_restaurant['price'][all_restaurant.restaurant == res_name].tolist()
-    res_rate = all_restaurant['rate'][all_restaurant.restaurant == res_name].tolist()
 
     bubble = BubbleContainer(
             direction='ltr',
@@ -123,44 +121,6 @@ def rest_con(reply_text):
                                     ),
                                     TextComponent(
                                         text=res_open[0],
-                                        wrap=True,
-                                        color='#666666',
-                                        size='sm',
-                                        flex=5,
-                                    ),
-                                ],
-                            ),
-                            BoxComponent(
-                                layout='baseline',
-                                spacing='sm',
-                                contents=[
-                                    TextComponent(
-                                        text='Price',
-                                        color='#aaaaaa',
-                                        size='sm',
-                                        flex=1
-                                    ),
-                                    TextComponent(
-                                        text=res_price[0],
-                                        wrap=True,
-                                        color='#666666',
-                                        size='sm',
-                                        flex=5,
-                                    ),
-                                ],
-                            ),
-                            BoxComponent(
-                                layout='baseline',
-                                spacing='sm',
-                                contents=[
-                                    TextComponent(
-                                        text='Rate',
-                                        color='#aaaaaa',
-                                        size='sm',
-                                        flex=1
-                                    ),
-                                    TextComponent(
-                                        text=res_rate[0],
                                         wrap=True,
                                         color='#666666',
                                         size='sm',
