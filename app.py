@@ -278,7 +278,15 @@ def callback():
         abort(400)
     return 'OK'
 
-
+@handler.add(MessageEvent, message=LocationMessage)
+def handle_location_message(event):
+    line_bot_api.reply_message(
+        event.reply_token,
+        LocationSendMessage(
+            title=event.message.title, address=event.message.address,
+            latitude=event.message.latitude, longitude=event.message.longitude
+        )
+    )
 @handler.add(MessageEvent, message=TextMessage) # 處理文字訊息（message = TextMessage）
 def handle_message(event):
     text = event.message.text # 使用者傳的訊息存成變數 text
