@@ -79,7 +79,7 @@ def rest_con(reply_text):
                 size='full',
                 aspect_ratio='20:13',
                 aspect_mode='cover',
-                action=URIAction(uri='http://example.com', label='label')
+                action=URIAction(uri='https://www.google.com/maps/search/'+res_name, label='label')
             ),
             body=BoxComponent(
                 layout='vertical',
@@ -145,7 +145,7 @@ def rest_con(reply_text):
                     ButtonComponent(
                         style='link',
                         height='sm',
-                        action=URIAction(label='Call', uri='tel:000000'),
+                        action=URIAction(label='走起',uri='https://www.google.com/maps/search/'+res_name)
                     ),
                     # separator
                     SeparatorComponent(),
@@ -153,7 +153,7 @@ def rest_con(reply_text):
                     ButtonComponent(
                         style='link',
                         height='sm',
-                        action=URIAction(label='點我看菜單', uri=res_menu[0])
+                        action=URIAction(label='菜單', uri=res_menu[0])
                     )
                 ]
             ),
@@ -242,7 +242,7 @@ def random_res_recommand():
                     ButtonComponent(
                         style='link',
                         height='sm',
-                        action=URIAction(label='Call', uri='tel:000000'),
+                        action=URIAction(label='走起',uri='https://www.google.com/maps/search/'+res_name)
                     ),
                     # separator
                     SeparatorComponent(),
@@ -250,7 +250,7 @@ def random_res_recommand():
                     ButtonComponent(
                         style='link',
                         height='sm',
-                        action=URIAction(label='Menu', uri=res_menu[0])
+                        action=URIAction(label='菜單', uri=res_menu[0])
                     )
                 ]
             ),
