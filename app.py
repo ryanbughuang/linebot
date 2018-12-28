@@ -176,7 +176,7 @@ def random_res_recommand():
                 size='full',
                 aspect_ratio='20:13',
                 aspect_mode='cover',
-                action=URIAction(uri='http://example.com', label='label')
+                action=URIAction(uri='https://www.google.com/maps/search/'+res_name, label='label')
             ),
             body=BoxComponent(
                 layout='vertical',
