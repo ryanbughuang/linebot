@@ -353,10 +353,16 @@ def handle_message(event):
     elif '@' in text:
         message = rest_con(text)
         line_bot_api.reply_message(event.reply_token, message)
-	elif event.message.text == "蘋果即時新聞":
+    elif text == "蘋果即時新聞":
         content = apple_news()
         line_bot_api.reply_message(event.reply_token,TextSendMessage(text=content))
-	elif text == '徹底ㄎ':
+    elif text == "科技新報":
+        content = technews()
+        line_bot_api.reply_message(event.reply_token,TextSendMessage(text=content))
+    elif text == "PanX泛科技":
+        content = panx()
+        line_bot_api.reply_message(event.reply_token,TextSendMessage(text=content))
+    elif text == '徹底ㄎ':
         buttons_template = TemplateSendMessage(
             alt_text='新聞 template',
             template=ButtonsTemplate(
