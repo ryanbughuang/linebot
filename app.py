@@ -337,11 +337,9 @@ def handle_message(event):
 
     if  text == '發票':
         buttons_template = ButtonsTemplate(
-            thumbnail_image_url='https://i.imgur.com/fIKfTIi.jpg',title='My buttons sample', text='哈', actions=[
-                URIAction(label='Go to line.me', uri='https://line.me'),
-                PostbackAction(label='ping', data='ping'),
-                PostbackAction(label='ping with text', data='ping', text='ping'),
-                MessageAction(label='Translate Rice', text='米') #Messageaction: 替使用者傳訊息，label為選項的文字，text為要傳的訊息
+            thumbnail_image_url='https://i.imgur.com/fIKfTIi.jpg',title='選擇月份', text='看看中獎不', actions=[
+                URIAction(label='7.8月發票', uri='http://invoice.etax.nat.gov.tw/'),
+                URIAction(label='9.10月發票', uri='http://invoice.etax.nat.gov.tw/'),
             ])
         template_message = TemplateSendMessage(
             alt_text='Buttons alt text', template=buttons_template)
