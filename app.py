@@ -36,7 +36,6 @@ def apple_news():
 	
 def technews():
     target_url = 'https://technews.tw/'
-    print('Start parsing movie ...')
     rs = requests.session()
     res = rs.get(target_url, verify=False)
     res.encoding = 'utf-8'
@@ -44,7 +43,7 @@ def technews():
     content = ""
 
     for index, data in enumerate(soup.select('article div h1.entry-title a')):
-        if index == 12:
+        if index == 5:
             return content
         title = data.text
         link = data['href']
@@ -53,7 +52,6 @@ def technews():
 	
 def panx():
     target_url = 'https://panx.asia/'
-    print('Start parsing ptt hot....')
     rs = requests.session()
     res = rs.get(target_url, verify=False)
     soup = BeautifulSoup(res.text, 'html.parser')
