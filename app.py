@@ -1,4 +1,7 @@
 from __future__ import unicode_literals
+import requests
+import re
+from bs4 import BeautifulSoup
 import pandas as pd
 import numpy as np
 import errno
@@ -18,7 +21,48 @@ from linebot.models import *
 
 app = Flask(__name__)
 
+def apple_news():
+    target_url = 'https://tw.appledaily.com/new/realtime'
+    rs = requests.session()
+    res = rs.get(target_url, verify=False)
+    soup = BeautifulSoup(res.text, 'html.parser')
+    content = ""
+    for index, data in enumerate(soup.select('.rtddt a'), 0):
+        if index == 5:
+            return content
+        link = data['href']
+        content += '{}\n\n'.format(link)
+    return content
+	
+def technews():
+    target_url = 'https://technews.tw/'
+    print('Start parsing movie ...')
+    rs = requests.session()
+    res = rs.get(target_url, verify=False)
+    res.encoding = 'utf-8'
+    soup = BeautifulSoup(res.text, 'html.parser')
+    content = ""
 
+    for index, data in enumerate(soup.select('article div h1.entry-title a')):
+        if index == 12:
+            return content
+        title = data.text
+        link = data['href']
+        content += '{}\n{}\n\n'.format(title, link)
+    return content
+	
+def panx():
+    target_url = 'https://panx.asia/'
+    print('Start parsing ptt hot....')
+    rs = requests.session()
+    res = rs.get(target_url, verify=False)
+    soup = BeautifulSoup(res.text, 'html.parser')
+    content = ""
+    for data in soup.select('div.container div.row div.desc_wrap h2 a'):
+        title = data.text
+        link = data['href']
+        content += '{}\n{}\n\n'.format(title, link)
+    return content
 
 def rest_selector(reply_text): #待改進：如果某類型沒有餐廳就不要輸出
     # import the restaurant data
@@ -301,6 +345,33 @@ def handle_message(event):
     elif '@' in text:
         message = rest_con(text)
         line_bot_api.reply_message(event.reply_token, message)
+	elif event.message.text == "蘋果即時新聞":
+        content = apple_news()
+        line_bot_api.reply_message(event.reply_token,TextSendMessage(text=content))
+	elif text == '徹底ㄎ':
+        buttons_template = TemplateSendMessage(
+            alt_text='新聞 template',
+            template=ButtonsTemplate(
+                title='新聞類型',
+                text='請選擇',
+                thumbnail_image_url='https://i.imgur.com/vkqbLnz.png',
+                actions=[
+                    MessageTemplateAction(
+                        label='蘋果即時新聞',
+                        text='蘋果即時新聞'
+                    ),
+                    MessageTemplateAction(
+                        label='科技新報',
+                        text='科技新報'
+                    ),
+                    MessageTemplateAction(
+                        label='PanX泛科技',
+                        text='PanX泛科技'
+                    )
+                ]
+            )
+        )
+        line_bot_api.reply_message(event.reply_token, buttons_template)
     elif text == '吃吃':
         carousel_template = CarouselTemplate(columns=[
             CarouselColumn(text='大門',thumbnail_image_url='https://imageshack.com/a/img922/5797/bmTsZR.jpg', actions=[
