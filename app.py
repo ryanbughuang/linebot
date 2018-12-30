@@ -123,7 +123,7 @@ def rest_con(reply_text):
                 size='full',
                 aspect_ratio='20:13',
                 aspect_mode='cover',
-                action=URIAction(uri='http://example.com', label='label')
+                action=URIAction(uri='https://www.google.com/maps/search/'+res_name, label='label')
             ),
             body=BoxComponent(
                 layout='vertical',
@@ -189,7 +189,7 @@ def rest_con(reply_text):
                     ButtonComponent(
                         style='link',
                         height='sm',
-                        action=URIAction(label='Call', uri='tel:000000'),
+                        action=URIAction(label='走起',uri='https://www.google.com/maps/search/'+res_name)
                     ),
                     # separator
                     SeparatorComponent(),
@@ -197,7 +197,7 @@ def rest_con(reply_text):
                     ButtonComponent(
                         style='link',
                         height='sm',
-                        action=URIAction(label='點我看菜單', uri=res_menu[0])
+                        action=URIAction(label='菜單', uri=res_menu[0])
                     )
                 ]
             ),
@@ -220,7 +220,7 @@ def random_res_recommand():
                 size='full',
                 aspect_ratio='20:13',
                 aspect_mode='cover',
-                action=URIAction(uri='http://example.com', label='label')
+                action=URIAction(uri='https://www.google.com/maps/search/'+res_name, label='label')
             ),
             body=BoxComponent(
                 layout='vertical',
@@ -286,7 +286,7 @@ def random_res_recommand():
                     ButtonComponent(
                         style='link',
                         height='sm',
-                        action=URIAction(label='Call', uri='tel:000000'),
+                        action=URIAction(label='走起',uri='https://www.google.com/maps/search/'+res_name)
                     ),
                     # separator
                     SeparatorComponent(),
@@ -294,7 +294,7 @@ def random_res_recommand():
                     ButtonComponent(
                         style='link',
                         height='sm',
-                        action=URIAction(label='Menu', uri=res_menu[0])
+                        action=URIAction(label='菜單', uri=res_menu[0])
                     )
                 ]
             ),
@@ -322,7 +322,15 @@ def callback():
         abort(400)
     return 'OK'
 
-
+@handler.add(MessageEvent, message=LocationMessage)
+def handle_location_message(event):
+    line_bot_api.reply_message(
+        event.reply_token,
+        LocationSendMessage(
+            title='test', address=event.message.address,
+            latitude=event.message.latitude, longitude=event.message.longitude
+        )
+    )
 @handler.add(MessageEvent, message=TextMessage) # 處理文字訊息（message = TextMessage）
 def handle_message(event):
     text = event.message.text # 使用者傳的訊息存成變數 text
