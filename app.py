@@ -337,7 +337,7 @@ def handle_message(event):
 
     if  text == '發票':
         buttons_template = ButtonsTemplate(
-            thumbnail_image_url='https://i.imgur.com/fIKfTIi.jpg',title='看看中獎不', text='選擇月份', actions=[
+            thumbnail_image_url='https://i.imgur.com/PtvI0GM.jpg',title='看看中獎不', text='選擇月份', actions=[
                 URIAction(label='7.8月發票', uri='https://www.etax.nat.gov.tw/etw-main/web/ETW183W2_10707/'),
                 URIAction(label='9.10月發票', uri='https://www.etax.nat.gov.tw/etw-main/web/ETW183W2_10709/'),
             ])
