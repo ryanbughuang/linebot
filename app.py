@@ -258,6 +258,14 @@ def random_res_recommand():
                     ButtonComponent(
                         style='link',
                         height='sm',
+                        action=URIAction(label='食記',uri='https://www.google.com/search?q='+res_name+'+'+res_location)
+                    ),
+                    # callAction, separator, websiteAction
+                    SpacerComponent(size='sm'),
+                    # callAction
+                    ButtonComponent(
+                        style='link',
+                        height='sm',
                         action=URIAction(label='走起',uri='https://www.google.com/maps/search/'+res_name)
                     ),
                     # separator
