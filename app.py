@@ -46,14 +46,14 @@ def getData_Invoice(month):
             colms.append("")
         colms.append(table_row.select_one('td').text)
         content.append(colms)
-    return content
-
-# #print(getData_Invoice(10707))
-# ans=getData_Invoice(10707)
-
-# for i in [1,3,5,12]:
-#     ans[i][1]=ans[i][1].strip('\n')
-#     print(ans[i])
+    # 取得號碼列
+    winNum = ''
+    for i in [1,3,5,12]:
+        content[i][1] = content[i][1].strip('\n')
+        winNum += content[i][0] + '｜' + content[i][1]
+        if i != 12:
+            winNum += '\n'
+    return winNum
 
 def free_news():
     target_url = 'http://food.ltn.com.tw/'
@@ -344,8 +344,8 @@ def handle_message(event):
     if  text == '發票':
         buttons_template = ButtonsTemplate(
             thumbnail_image_url='https://i.imgur.com/PtvI0GM.jpg',title='看看中獎不', text='選擇月份', actions=[
-                MessageAction(label='7.8月發票', text='123'),
-                MessageAction(label='9.10月發票', text='456'),
+                MessageAction(label='7.8月發票', text=getData_Invoice(10707)),
+                MessageAction(label='9.10月發票', text=getData_Invoice(10709)),
             ])
         template_message = TemplateSendMessage(
             alt_text='Buttons alt text', template=buttons_template)
