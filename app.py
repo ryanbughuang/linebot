@@ -45,9 +45,15 @@ def getData_Invoice(month):
         else:
             colms.append("")
         colms.append(table_row.select_one('td').text)
-
         content.append(colms)
     return content
+
+# #print(getData_Invoice(10707))
+# ans=getData_Invoice(10707)
+
+# for i in [1,3,5,12]:
+#     ans[i][1]=ans[i][1].strip('\n')
+#     print(ans[i])
 
 def free_news():
     target_url = 'http://food.ltn.com.tw/'
@@ -338,8 +344,8 @@ def handle_message(event):
     if  text == '發票':
         buttons_template = ButtonsTemplate(
             thumbnail_image_url='https://i.imgur.com/PtvI0GM.jpg',title='看看中獎不', text='選擇月份', actions=[
-                URIAction(label='7.8月發票', uri='https://www.etax.nat.gov.tw/etw-main/web/ETW183W2_10707/'),
-                URIAction(label='9.10月發票', uri='https://www.etax.nat.gov.tw/etw-main/web/ETW183W2_10709/'),
+                MessageAction(label='7.8月發票', text='123'),
+                MessageAction(label='9.10月發票', text='456'),
             ])
         template_message = TemplateSendMessage(
             alt_text='Buttons alt text', template=buttons_template)
