@@ -18,8 +18,36 @@ from linebot.exceptions import (
     InvalidSignatureError
 )
 from linebot.models import *
+import time
+import datetime
+import types
+import json
+import ast
 
 app = Flask(__name__)
+
+def getData_Invoice(month):
+    url = "https://www.etax.nat.gov.tw/etw-main/front/ETW183W2_" + str(month) +"/"
+    response = requests.get(url)
+    # 如果獲取資料出現問題則報錯
+    if str(response.status_code)!="200":
+        print("The HTTP Status Code is "+str(response.status_code)+", please check!!!!!!!!")
+        os._exit(0)
+    # 使用Beautifulsoup獲取網站資料,並取得表格
+    soup = BeautifulSoup(response.content, "lxml")
+    table = soup.select_one('table.table_b')
+    # 讀取表格內容
+    content = []
+    for table_row in table.select('tr'):
+        colms = []
+        if table_row.select('th'):
+            colms.append(table_row.select_one('th').text)
+        else:
+            colms.append("")
+        colms.append(table_row.select_one('td').text)
+
+        content.append(colms)
+    return content
 
 def free_news():
     target_url = 'http://food.ltn.com.tw/'
