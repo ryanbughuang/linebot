@@ -342,10 +342,12 @@ def handle_message(event):
     text = event.message.text # 使用者傳的訊息存成變數 text
 
     if  text == '發票':
+        out_invoice1 = getData_Invoice(10707)
+        out_invoice2 = getData_Invoice(10709)
         buttons_template = ButtonsTemplate(
             thumbnail_image_url='https://i.imgur.com/PtvI0GM.jpg',title='看看中獎不', text='選擇月份', actions=[
-                MessageAction(label='7.8月發票', text=getData_Invoice(10707)),
-                MessageAction(label='9.10月發票', text=getData_Invoice(10709)),
+                MessageAction(label='7.8月發票', text=out_invoice1),
+                MessageAction(label='9.10月發票', text=out_invoice2),
             ])
         template_message = TemplateSendMessage(
             alt_text='Buttons alt text', template=buttons_template)
