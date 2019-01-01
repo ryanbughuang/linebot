@@ -30,10 +30,6 @@ app = Flask(__name__)
 def getData_Invoice():
     url = "https://www.etax.nat.gov.tw/"
     response = urlopen(url).read()
-    # 如果獲取資料出現問題則報錯
-    if str(response.status_code)!="200":
-        #print("The HTTP Status Code is "+str(response.status_code)+", please check!!!!!!!!")
-        os._exit(0)
     # 使用Beautifulsoup獲取網站資料
     soup = BeautifulSoup(response, "html.parser")
     results = soup.find_all("span", class_="t18Red")
@@ -43,16 +39,15 @@ def getData_Invoice():
     month_newst = months[0].find_next_sibling('h2').text
     # 上一期
     month_previous = months[1].find_next_sibling('h2').text  
-   
     this = ''
     this += ("最新一期統一發票開獎號碼 ({0})：\n".format(month_newst))
     for index, item in enumerate(results[:4]):
-        out = ('{0} | {1}\n'.format(subTitle[index], item.text)) 
+        out = ('>> {0} : {1}\n'.format(subTitle[index], item.text)) 
         this += out
     last = ''
     last += ("上期統一發票開獎號碼 ({0})：\n".format(month_previous))
     for index2, item2 in enumerate(results[4:8]):
-        out1 = ('{0} | {1}\n'.format(subTitle[index2], item2.text)) 
+        out1 = ('>> {0} : {1}\n'.format(subTitle[index2], item2.text)) 
         last += out1
     return this, last
 
@@ -346,8 +341,8 @@ def handle_message(event):
         out_invoice1, out_invoice2 = getData_Invoice()
         buttons_template = ButtonsTemplate(
             thumbnail_image_url='https://i.imgur.com/PtvI0GM.jpg',title='看看中獎不', text='選擇月份', actions=[
-                MessageAction(label='7.8月發票', text=out_invoice2),
-                MessageAction(label='9.10月發票', text=out_invoice1),
+                MessageAction(label='上一期發票號碼', text=out_invoice2),
+                MessageAction(label='最新一期發票號碼', text=out_invoice1),
             ])
         template_message = TemplateSendMessage(
             alt_text='Buttons alt text', template=buttons_template)
