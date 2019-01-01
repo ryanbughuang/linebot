@@ -31,10 +31,10 @@ def getData_Invoice(month):
     response = requests.get(url)
     # 如果獲取資料出現問題則報錯
     if str(response.status_code)!="200":
-        print("The HTTP Status Code is "+str(response.status_code)+", please check!!!!!!!!")
+        #print("The HTTP Status Code is "+str(response.status_code)+", please check!!!!!!!!")
         os._exit(0)
     # 使用Beautifulsoup獲取網站資料,並取得表格
-    soup = BeautifulSoup(response.content, "lxml")
+    soup = BeautifulSoup(response.content, "html.parser")
     table = soup.select_one('table.table_b')
     # 讀取表格內容
     content = []
