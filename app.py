@@ -347,15 +347,7 @@ def handle_message(event):
             ])
         template_message = TemplateSendMessage(
             alt_text='Buttons alt text', template=buttons_template)
-        line_bot_api.reply_message(event.reply_token, template_message) # 送出訊息，訊息內容為'template_message
-        current_month = datetime.datetime.now().month
-        current_day = datetime.datetime.now().day
-        if current_month == 12:
-            message = TextSendMessage(text='9-10月發票兌獎即將於「1/5」截止，記得兌發票呀！')
-            line_bot_api.reply_message(event.reply_token, message)
-        elif current_month == 1 and current_day <= 5:
-            message = TextSendMessage(text='9-10月發票兌獎即將於「1/5」截止，記得兌發票呀！')
-            line_bot_api.reply_message(event.reply_token, message)'
+        line_bot_api.reply_message(event.reply_token, template_message) # 送出訊息，訊息內容為'template_message'
     # 回覆吃吃的回傳訊息
     elif '_' in text:
         message = rest_selector(text)
