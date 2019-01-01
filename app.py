@@ -393,24 +393,13 @@ def handle_message(event):
         template_message = TemplateSendMessage(
             alt_text='Carousel alt text', template=carousel_template)
         line_bot_api.reply_message(event.reply_token, template_message)
-    elif text == 'imagecarousel':
-        image_carousel_template = ImageCarouselTemplate(columns=[
-            ImageCarouselColumn(image_url='https://i.imgur.com/NrFOHGo.jpg',
-                                action=DatetimePickerAction(label='datetime',
-                                                            data='datetime_postback',
-                                                            mode='datetime')),
-            ImageCarouselColumn(image_url='https://via.placeholder.com/1024x1024',
-                                action=DatetimePickerAction(label='date',
-                                                            data='date_postback',
-                                                            mode='date'))
-        ])
-        template_message = TemplateSendMessage(
-            alt_text='ImageCarousel alt text', template=image_carousel_template)
-        line_bot_api.reply_message(event.reply_token, template_message)
+   
     elif text == '推薦':
         message = random_res_recommand()
         line_bot_api.reply_message(event.reply_token, message)
     
+    elif '特別獎' in text:
+        pass
     else:
         message = TextSendMessage(text=event.message.text)
         line_bot_api.reply_message(event.reply_token, message)
