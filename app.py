@@ -34,22 +34,21 @@ def getData_Invoice():
     htmlContent = urlopen(request_url).read()
     soup = BeautifulSoup(htmlContent, "html.parser")
     results = soup.find_all("span", class_="t18Red")
-    subTitle = soup.find_all("td", class_="title")
-	subTitle[3] = '增開六獎'
+    subTitle = ['特別獎', '特獎', '頭獎', '增開六獎']
     months = soup.find_all('h2', {'id': 'tabTitle'})
     # 最新一期
     month_newst = months[0].find_next_sibling('h2').text
     # 上一期
     month_previous = months[1].find_next_sibling('h2').text  
     this = ''
-    this += ("({0})：\n".format(month_newst))
+    this += ("最新一期統一發票開獎號碼 ({0})：\n".format(month_newst))
     for index, item in enumerate(results[:4]):
-        out = ('>> {0} : {1}\n'.format(subTitle[index].text, item.text)) 
+        out = ('>> {0} : {1}\n'.format(subTitle[index], item.text)) 
         this += out
     last = ''
-    last += ("({0})：\n".format(month_previous))
+    last += ("上期統一發票開獎號碼 ({0})：\n".format(month_previous))
     for index2, item2 in enumerate(results[4:8]):
-        out1 = ('>> {0} : {1}\n'.format(subTitle[index2].text, item2.text)) 
+        out1 = ('>> {0} : {1}\n'.format(subTitle[index2], item2.text)) 
         last += out1
     return this, last
 
