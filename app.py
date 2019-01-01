@@ -346,8 +346,8 @@ def handle_message(event):
         out_invoice2 = getData_Invoice(10709)
         buttons_template = ButtonsTemplate(
             thumbnail_image_url='https://i.imgur.com/PtvI0GM.jpg',title='看看中獎不', text='選擇月份', actions=[
-                MessageAction(label='7.8月發票', text=out_invoice1),
-                MessageAction(label='9.10月發票', text=out_invoice2),
+                PostbackAction(label='7.8月發票', text=out_invoice1),
+                PostbackAction(label='9.10月發票', text=out_invoice2),
             ])
         template_message = TemplateSendMessage(
             alt_text='Buttons alt text', template=buttons_template)
