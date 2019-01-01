@@ -393,7 +393,7 @@ def handle_message(event):
         template_message = TemplateSendMessage(
             alt_text='Carousel alt text', template=carousel_template)
         line_bot_api.reply_message(event.reply_token, template_message)
-    elif text == 'image_carousel':
+    elif text == 'imagecarousel':
         image_carousel_template = ImageCarouselTemplate(columns=[
             ImageCarouselColumn(image_url='https://i.imgur.com/NrFOHGo.jpg',
                                 action=DatetimePickerAction(label='datetime',
@@ -422,8 +422,8 @@ def handle_message(event):
             alt_text='Buttons alt text', template=buttons_template)
         line_bot_api.reply_message(event.reply_token, template_message)
     else:
-        message = TextSendMessage(text=event.message.text)
-        line_bot_api.reply_message(event.reply_token, message)
+        #message = TextSendMessage(text=event.message.text)
+        #line_bot_api.reply_message(event.reply_token, message)
 
 
 if __name__ == "__main__":
