@@ -28,10 +28,11 @@ from urllib.request import urlopen
 app = Flask(__name__)
 
 def getData_Invoice():
-    url = "https://www.etax.nat.gov.tw/"
-    response = urlopen(url).read()
-    # 使用Beautifulsoup獲取網站資料
-    soup = BeautifulSoup(response, "html.parser")
+    # 財政部官網
+    request_url = 'http://invoice.etax.nat.gov.tw/' 
+    # 取得HTML
+    htmlContent = urlopen(request_url).read()
+    soup = BeautifulSoup(htmlContent, "html.parser")
     results = soup.find_all("span", class_="t18Red")
     subTitle = ['特別獎', '特獎', '頭獎', '增開六獎'] # 獎項
     months = soup.find_all('h2', {'id': 'tabTitle'})
