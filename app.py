@@ -339,7 +339,7 @@ def handle_message(event):
     text = event.message.text # 使用者傳的訊息存成變數 text
 
     if text == '發票':
-        this, last = getData_Invoice()
+        out_invoice1, out_invoice2 = getData_Invoice()
         line_bot_api.reply_message(
             event.reply_token,
             TextSendMessage(
@@ -347,10 +347,10 @@ def handle_message(event):
                 quick_reply=QuickReply(
                     items=[
                         QuickReplyButton(
-                            action=MessageAction(label="最新一期", text = this)
+                            action=MessageAction(label="最新一期", text = out_invoice1)
                         ),
                         QuickReplyButton(
-                            action=MessageAction(label="上一期", text = last)
+                            action=MessageAction(label="上一期", text = out_invoice2)
                         ),
                     ])))
     # 回覆吃吃的回傳訊息
