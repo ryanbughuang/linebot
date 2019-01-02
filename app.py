@@ -234,7 +234,7 @@ def rest_con(reply_text):
                 ]
             ),
         )
-    message = FlexSendMessage(alt_text="hello", contents=bubble)
+    message = FlexSendMessage(alt_text="推薦你試試「"+res_name+"」", contents=bubble)
     return message
 #隨機推薦餐廳
 def random_res_recommand():
@@ -338,7 +338,7 @@ def random_res_recommand():
             ),
         )
     
-    message = FlexSendMessage(alt_text="hello", contents=bubble)
+    message = FlexSendMessage(alt_text="推薦你看看「"+res_name+"」", contents=bubble)
     return message
 # Channel Access Token
 line_bot_api = LineBotApi('03lCKiHH72CQak6lrU9vdhwyu5HUDEeihF4bQIxokPtct6L03QXfkHhvoFZI579Z95i9hdkX6eRbOWDOB+t0XwJMv/D70W7/x3wBX4+wCldtj4WpF7QC2yqClPExW/nrOUZMZJakON6zJsgAuR8N5wdB04t89/1O/w1cDnyilFU=')
@@ -378,7 +378,7 @@ def handle_message(event):
         line_bot_api.reply_message(
             event.reply_token,
             TextSendMessage(
-                text='想看哪一期呢?',
+                text='想看哪一期呢？',
                 quick_reply=QuickReply(
                     items=[
                         QuickReplyButton(
