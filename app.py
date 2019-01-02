@@ -133,7 +133,7 @@ def rest_selector(reply_text): #待改進：如果某類型沒有餐廳就不要
                 CarouselColumn(text='大吃爆',thumbnail_image_url='https://imageshack.com/a/img924/5194/PrGO0e.jpg', actions=action_150_up),
             ])
     template_message = TemplateSendMessage(
-        alt_text='Carousel alt text', template=carousel_template)
+        alt_text='吃吃', template=carousel_template)
 
     return template_message
     
@@ -437,7 +437,7 @@ def handle_message(event):
             ]),
         ])
         template_message = TemplateSendMessage(
-            alt_text='Carousel alt text', template=carousel_template)
+            alt_text='吃吃', template=carousel_template)
         line_bot_api.reply_message(event.reply_token, template_message)
    
     elif text == '推薦':
