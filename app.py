@@ -338,16 +338,21 @@ def handle_location_message(event):
 def handle_message(event):
     text = event.message.text # 使用者傳的訊息存成變數 text
 
-    if  text == '發票':
-        out_invoice1, out_invoice2 = getData_Invoice()
-        buttons_template = ButtonsTemplate(
-            thumbnail_image_url='https://i.imgur.com/PtvI0GM.jpg',title='看看中獎不', text='選擇月份', actions=[
-                MessageAction(label='上一期發票號碼', text=out_invoice2),
-                MessageAction(label='最新一期發票號碼', text=out_invoice1),
-            ])
-        template_message = TemplateSendMessage(
-            alt_text='Buttons alt text', template=buttons_template)
-        line_bot_api.reply_message(event.reply_token, template_message) # 送出訊息，訊息內容為'template_message'
+    if text == '發票':
+        this, last = getData_Invoice()
+        line_bot_api.reply_message(
+            event.reply_token,
+            TextSendMessage(
+                text='想看哪一期呢?',
+                quick_reply=QuickReply(
+                    items=[
+                        QuickReplyButton(
+                            action=MessageAction(label="最新一期", text = this)
+                        ),
+                        QuickReplyButton(
+                            action=MessageAction(label="上一期", text = last)
+                        ),
+                    ])))
     # 回覆吃吃的回傳訊息
     elif '_' in text:
         message = rest_selector(text)
@@ -396,9 +401,7 @@ def handle_message(event):
     
     elif '特別獎' in text:
         pass
-    else:
-        message = TextSendMessage(text=event.message.text)
-        line_bot_api.reply_message(event.reply_token, message)
+
 
 
 if __name__ == "__main__":
