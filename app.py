@@ -52,6 +52,35 @@ def getData_Invoice():
         last += out1
     return this, last
 
+def getData_Invoice1(month):
+    url = "https://www.etax.nat.gov.tw/etw-main/front/ETW183W2_" + str(month) +"/"
+    response = requests.get(url)
+    # 如果獲取資料出現問題則報錯
+    if str(response.status_code)!="200":
+        #print("The HTTP Status Code is "+str(response.status_code)+", please check!!!!!!!!")
+        os._exit(0)
+    # 使用Beautifulsoup獲取網站資料,並取得表格
+    soup = BeautifulSoup(response.content, "html.parser")
+    table = soup.select_one('table.table_b')
+    # 讀取表格內容
+    content = []
+    for table_row in table.select('tr'):
+        colms = []
+        if table_row.select('th'):
+            colms.append(table_row.select_one('th').text)
+        else:
+            colms.append("")
+        colms.append(table_row.select_one('td').text)
+        content.append(colms)
+    # 取得號碼列
+    winNum = ''
+    for i in [1,3,5,12]:
+        content[i][1] = content[i][1].strip('\n')
+        winNum += content[i][0] + '｜' + content[i][1]
+        if i != 12:
+            winNum += '\n'
+    return winNum
+
 def free_news():
     target_url = 'http://food.ltn.com.tw/'
     rs = requests.session()
@@ -352,7 +381,17 @@ def handle_message(event):
                         QuickReplyButton(
                             action=MessageAction(label="上一期", text = out_invoice2)
                         ),
+                        QuickReplyButton(
+                            action=MessageAction(label="其他", text = '請輸入民國年與當期第一月月份:\n(格式範例:107-09, 106-03)')
+                        ),
                     ])))
+    elif '-' in text:
+        text = list(text) ; text.pop(3)
+        text1 = ''
+        for i in text:
+            text1 += i
+        out_invoice = getData_Invoice1(int(text1))
+        line_bot_api.reply_message(event.reply_token, TextSendMessage(text=out_invoice))
     # 回覆吃吃的回傳訊息
     elif '_' in text:
         message = rest_selector(text)
