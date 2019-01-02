@@ -326,7 +326,7 @@ def random_res_recommand():
                     ButtonComponent(
                         style='link',
                         height='sm',
-                        action=URIAction(label='食記', uri='https://www.google.com/search?q='+res_name+'+'+res_location[0])
+                        action=URIAction(label='食記', uri='https://www.google.com/search?q='+res_name)
                     ),
                     SeparatorComponent(),
                     ButtonComponent(
