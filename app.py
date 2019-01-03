@@ -31,7 +31,7 @@ def alarm():
     today =  datetime.date.today()
     today = today.strftime('%y/%m/%d') ; today = list(today)
     month = [1,3,5,7,9,11]
-    if (int(str(today[3])+str(today[4])) in month) and int(str(today[6])+str(today[7])) == 25:
+    if (int(str(today[3])+str(today[4])) in month) and str(today[6])+str(today[7]) == '25':
         return True	
     return False
 
