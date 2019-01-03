@@ -27,6 +27,14 @@ from urllib.request import urlopen
 
 app = Flask(__name__)
 
+def alarm():
+    today =  datetime.date.today()
+    today = today.strftime('%y/%m/%d') ; today = list(today)
+    month = [1,3,5,7,9,11]
+    if (int(str(today[3])+str(today[4])) in month) and int(str(today[6])+str(today[7])) == 25:
+        return True	
+    return False
+
 def getData_Invoice():
     # 財政部官網
     request_url = 'http://invoice.etax.nat.gov.tw/' 
@@ -446,7 +454,12 @@ def handle_message(event):
     
     elif '特別獎' in text:
         pass
-
+    else:
+        answer = alarm()
+        if answer == True:
+            line_bot_api.reply_message(event.reply_token, TextSendMessage(text='今天發票開獎囉~祝您中大獎'))
+        else:
+            line_bot_api.reply_message(event.reply_token, TextSendMessage(text='再忙也要記得吃飯喔'))    
 
 
 if __name__ == "__main__":
