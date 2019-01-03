@@ -378,7 +378,7 @@ def handle_message(event):
         line_bot_api.reply_message(
             event.reply_token,
             TextSendMessage(
-                text='想看哪一期呢？',
+                text='想看哪一期呢？\n(若系統無反應請:\n(1)更新至最新版本\n(2)直接輸入民國年與當期第一月月份)\n(格式範例:107-09, 106-03)',
                 quick_reply=QuickReply(
                     items=[
                         QuickReplyButton(
