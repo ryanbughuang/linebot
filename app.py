@@ -28,7 +28,8 @@ from urllib.request import urlopen
 app = Flask(__name__)
 
 def alarm_out():
-    today = datetime.date.today()
+    #today = datetime.date.today()
+    today = datetime.datetime(2018,1,25)
     today = today.strftime('%y/%m/%d') ; today = list(today)
     month1 = [3,5,7,9,11]
     month_today = int(str(today[3])+str(today[4]))
@@ -40,7 +41,7 @@ def alarm_out():
         period = '今天'+str(11)+'-'+str(12)+'月期別發票開獎囉~祝您中大獎'  
         return period
     else:
-        return NAN
+        return False
 
 def getData_Invoice():
     # 財政部官網
@@ -463,7 +464,7 @@ def handle_message(event):
         pass
     else:
         answer = alarm_out()
-        if answer == NAN:
+        if answer == False:
             line_bot_api.reply_message(event.reply_token, TextSendMessage(text='再忙也要記得吃飯喔'))
         else:
             line_bot_api.reply_message(event.reply_token, TextSendMessage(text= alarm_out()))    
