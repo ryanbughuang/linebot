@@ -27,8 +27,7 @@ from urllib.request import urlopen
 app = Flask(__name__)
 
 def alarm_out():
-    #today = datetime.date.today()
-    today = datetime.datetime(2018,1,25)
+    today = datetime.date.today()
     today = today.strftime('%y/%m/%d') ; today = list(today)
     month1 = [3,5,7,9,11]
     month_today = int(str(today[3])+str(today[4]))
