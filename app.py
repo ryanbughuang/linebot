@@ -35,7 +35,7 @@ def alarm_out():
     if (month_today in month1) and day_today == 25:
         period = '今天'+str(month_today - 2)+'-'+str(month_today - 1) + '月期別發票開獎囉~祝您中大獎'
         return period
-    elif month_today == 1:
+    elif month_today == 1 and day_today == 25:
         period = '今天'+str(11)+'-'+str(12)+'月期別發票開獎囉~祝您中大獎'  
         return period
     else:
