@@ -463,7 +463,7 @@ def handle_message(event):
     elif text == 'profile':
         line_bot_api.reply_message(event.reply_token, TextSendMessage(str(event.source.user_id)))
         if isinstance(event.source, SourceUser):
-            profile = line_bot_api.get_profile(event.source.user_id)
+            profile = line_bot_api.get_profile(str(event.source.user_id))
             line_bot_api.reply_message(
                 event.reply_token, [
                     TextSendMessage(text='Display name: ' + profile.display_name),
