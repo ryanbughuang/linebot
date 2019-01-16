@@ -460,9 +460,19 @@ def handle_message(event):
     
     elif '特別獎' in text:
         pass
-    elif 'test' in text:
-        message = event.source.user_id
-        line_bot_api.reply_message(event.reply_token, message)
+    elif text == 'profile':
+        if isinstance(event.source, SourceUser):
+            profile = line_bot_api.get_profile(event.source.user_id)
+            line_bot_api.reply_message(
+                event.reply_token, [
+                    TextSendMessage(text='Display name: ' + profile.display_name),
+                    TextSendMessage(text='Status message: ' + profile.status_message)
+                ]
+            )
+        else:
+            line_bot_api.reply_message(
+                event.reply_token,
+                TextSendMessage(text="Bot can't use profile API without user ID"))
     else:
         answer = alarm_out()
         if answer == False:
