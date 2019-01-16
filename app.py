@@ -460,6 +460,9 @@ def handle_message(event):
     
     elif '特別獎' in text:
         pass
+    elif 'test' in text:
+        message = event.replyToken.userId
+        line_bot_api.reply_message(event.reply_token, message)
     else:
         answer = alarm_out()
         if answer == False:
