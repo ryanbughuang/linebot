@@ -354,24 +354,11 @@ def random_res_recommand():
     
     message = FlexSendMessage(alt_text="推薦你看看「"+res_name+"」", contents=bubble)
     return message
-
 # Channel Access Token
 line_bot_api = LineBotApi('03lCKiHH72CQak6lrU9vdhwyu5HUDEeihF4bQIxokPtct6L03QXfkHhvoFZI579Z95i9hdkX6eRbOWDOB+t0XwJMv/D70W7/x3wBX4+wCldtj4WpF7QC2yqClPExW/nrOUZMZJakON6zJsgAuR8N5wdB04t89/1O/w1cDnyilFU=')
 # Channel Secret
 handler = WebhookHandler('fff9aae6226c58c93a7c5a8001e836f6')
-static_tmp_path = os.path.join(os.path.dirname(__file__), 'static', 'tmp')
 
-
-# function for create tmp dir for download content
-def make_static_tmp_dir():
-    try:
-        os.makedirs(static_tmp_path)
-    except OSError as exc:
-        if exc.errno == errno.EEXIST and os.path.isdir(static_tmp_path):
-            pass
-        else:
-            raise
-            
 # 監聽所有來自 /callback 的 Post Request
 @app.route("/callback", methods=['POST'])
 def callback():
