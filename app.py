@@ -461,7 +461,7 @@ def handle_message(event):
     elif '特別獎' in text:
         pass
     elif 'test' in text:
-        message = event.source.userId
+        message = event.source.user_id
         line_bot_api.reply_message(event.reply_token, message)
     else:
         answer = alarm_out()
